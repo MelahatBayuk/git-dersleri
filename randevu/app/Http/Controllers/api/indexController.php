@@ -28,12 +28,7 @@ class indexController extends Controller
         $returnArray['status']=false; //herhangi bir kayıt işlemi olana kadar false olarak kalsın
         $all=$request->except('_token'); //tüm verileri alıyoruz token harici
         $control=Appointment::where('date',$all['date'])->where('workingHour',$all['workingHour'])->count();
-        //seçilen tarih ve seçilen çalışma saatinde randevu var mı onun kontrolü yapılıyor
 
-        if ($control !=0){
-            $returnArray['message']="bu randevu tarihi doludur";
-            return response()->json($returnArray);
-        }
       $create=Appointment::create($all);
         if ($create){ //create işlemi başarılı şekilde oluşursa returnarrayi true yap
             $returnArray['status']=true;
